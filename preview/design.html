@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>观澜 · Insight Space — Android UI preview</title>
+<style>
+  :root {
+    --bg: #05080f;
+    --text: #eaf2ff;
+    --muted: #8fa5c4;
+    --blue: #64b5ff;
+    --violet: #b79cff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    background:
+      radial-gradient(680px 520px at 16% -10%, rgba(38, 91, 151, .42), transparent 70%),
+      radial-gradient(620px 480px at 92% 18%, rgba(92, 61, 153, .28), transparent 72%),
+      radial-gradient(700px 480px at 50% 110%, rgba(20, 74, 96, .22), transparent 70%),
+      var(--bg);
+    color: var(--text);
+    font: 14px/1.5 Inter, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+    padding: 24px 28px 18px;
+  }
+  .studio { max-width: 1080px; margin: 0 auto; }
+  .kicker {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--blue); font-size: 10px; font-weight: 700;
+    letter-spacing: .24em; text-transform: uppercase;
+  }
+  .kicker::before { content: ""; width: 28px; height: 1px; background: linear-gradient(90deg, var(--blue), transparent); }
+  h1 { margin: 10px 0 5px; font-size: 28px; line-height: 1.2; font-weight: 600; letter-spacing: -.02em; }
+  h1 span { color: var(--muted); font-weight: 400; }
+  .sub { margin: 0; color: var(--muted); font-size: 12px; letter-spacing: .04em; }
+  .stage { display: flex; justify-content: center; align-items: flex-start; gap: 44px; margin-top: 20px; }
+  .slot { width: 282px; height: 636px; position: relative; }
+  .caption {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: 0 4px 10px; color: var(--muted); font-size: 10px; letter-spacing: .12em;
+  }
+  .caption b { color: var(--text); font-size: 12px; letter-spacing: .04em; font-weight: 600; }
+  .caption em { font-style: normal; color: var(--blue); }
+  .phone {
+    position: absolute; top: 30px; left: 0;
+    width: 390px; height: 844px; border-radius: 54px;
+    background: #10141d; padding: 0; border: 6px solid #171c26;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.12),
+      0 0 0 8px #171c26,
+      0 0 0 9px rgba(255,255,255,.05),
+      0 30px 80px rgba(0,0,0,.65);
+    transform: scale(.70); transform-origin: top left;
+    overflow: hidden;
+  }
+  .screen {
+    position: relative; width: 390px; height: 844px; border-radius: 48px;
+    overflow: hidden;
+    background:
+      radial-gradient(420px 330px at 90% 0%, rgba(42,90,158,.35), transparent 65%),
+      radial-gradient(390px 330px at 0% 100%, rgba(90,58,158,.28), transparent 66%),
+      #070c18;
+  }
+  .statusbar {
+    position: absolute; top: 0; left: 0; right: 0; height: 30px; z-index: 12;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 25px; color: rgba(255,255,255,.9);
+    font-size: 10px; font-weight: 600; letter-spacing: .02em;
+  }
+  .status-right { display: flex; align-items: center; gap: 5px; opacity: .86; }
+  .bars { display: flex; align-items: end; gap: 1.5px; height: 9px; }
+  .bars i { display: block; width: 2.5px; background: currentColor; border-radius: 1px; }
+  .bars i:nth-child(1) { height: 4px; } .bars i:nth-child(2) { height: 6px; }
+  .bars i:nth-child(3) { height: 8px; } .bars i:nth-child(4) { height: 9px; }
+  .wifi { width: 12px; height: 9px; border: 1.4px solid currentColor; border-radius: 8px 8px 0 0; border-bottom: 0; position: relative; transform: scaleY(.7); }
+  .wifi::after { content: ""; position: absolute; left: 3px; bottom: 0; width: 3px; height: 3px; background: currentColor; border-radius: 50%; }
+  .battery { width: 18px; height: 9px; border: 1.2px solid rgba(255,255,255,.7); border-radius: 3px; padding: 1.5px; position: relative; }
+  .battery::after { content: ""; position: absolute; right: -3px; top: 2px; width: 1.5px; height: 3px; background: rgba(255,255,255,.55); border-radius: 0 1px 1px 0; }
+  .battery i { display: block; width: 78%; height: 100%; background: #eaf2ff; border-radius: 1px; }
+  .web {
+    position: absolute; left: 0; top: 86px; width: 390px; height: 726px;
+    background: #09111f; border: 0; display: block;
+  }
+  .web-shade {
+    position: absolute; left: 0; top: 86px; width: 390px; height: 726px;
+    pointer-events: none; z-index: 3;
+    background: linear-gradient(180deg, rgba(7,12,24,.20), transparent 18%, transparent 82%, rgba(7,12,24,.18));
+  }
+  .topbar {
+    position: absolute; z-index: 10; left: 12px; top: 36px; width: 256px; height: 50px;
+    border-radius: 18px; overflow: hidden;
+    background: linear-gradient(90deg, rgba(19,32,54,.96), rgba(10,18,32,.96));
+    border: 1px solid rgba(144,184,232,.20);
+    box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    display: flex; flex-direction: column;
+  }
+  .topbar-row { display: flex; align-items: center; height: 47px; padding: 0 4px 0 9px; }
+  .brand { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+  .logo {
+    width: 28px; height: 28px; border-radius: 50%; flex: 0 0 28px;
+    background: linear-gradient(45deg, #64b5ff, #b79cff);
+    display: grid; place-items: center; box-shadow: 0 0 18px rgba(100,181,255,.22);
+  }
+  .logo svg { width: 18px; height: 18px; }
+  .brand-copy { min-width: 0; }
+  .brand-title { font-size: 15px; line-height: 1.1; font-weight: 600; letter-spacing: .02em; }
+  .brand-sub {
+    margin-top: 2px; color: var(--blue); font-size: 8px; font-weight: 600;
+    letter-spacing: .1em; line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .actions { display: flex; align-items: center; }
+  .iconbtn { width: 36px; height: 36px; display: grid; place-items: center; color: rgba(234,242,255,.92); border-radius: 50%; }
+  .iconbtn.dim { color: rgba(234,242,255,.28); }
+  .iconbtn svg { width: 20px; height: 20px; }
+  .progress { height: 2px; margin: 0 10px 1px; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden; }
+  .progress i { display: block; width: 100%; height: 100%; border-radius: 2px; opacity: .38; background: linear-gradient(90deg, #64b5ff, #b79cff); }
+  .fab {
+    position: absolute; z-index: 10; right: 16px; bottom: 40px;
+    width: 60px; height: 60px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+    color: var(--blue);
+    background: linear-gradient(135deg, rgba(26,44,71,.96), rgba(10,18,32,.96));
+    border: 1px solid rgba(127,184,224,.30);
+    box-shadow: 0 10px 24px rgba(0,0,0,.40);
+  }
+  .fab svg { width: 20px; height: 20px; }
+  .fab span { font-size: 10px; font-weight: 600; letter-spacing: .02em; line-height: 1; }
+  .fab.left { left: 16px; right: auto; }
+  .gesture { position: absolute; z-index: 11; left: 50%; bottom: 15px; width: 124px; height: 4px; margin-left: -62px; border-radius: 4px; background: rgba(255,255,255,.55); }
+  .glow { position: absolute; width: 260px; height: 260px; border-radius: 50%; filter: blur(70px); pointer-events: none; opacity: .18; }
+  .g1 { background: #2d68ad; top: 40px; left: -100px; }
+  .g2 { background: #6b48a8; bottom: 40px; right: -100px; }
+  .foot { margin: 18px auto 0; text-align: center; color: #647894; font-size: 10px; letter-spacing: .08em; }
+</style>
+</head>
+<body>
+<div class="studio">
+  <div class="kicker">Guanlan / Android 14</div>
+  <h1>观澜 <span>· Insight Space</span></h1>
+  <p class="sub">A quiet WebView shell for two places — 体悟集 and 项目主页.</p>
+
+  <div class="stage">
+    <div class="slot">
+      <div class="caption"><b>体悟集</b><em>INSIGHT SPACE</em></div>
+      <div class="phone">
+        <div class="screen">
+          <div class="glow g1"></div><div class="glow g2"></div>
+          <iframe class="web" src="https://etherealnymph.github.io/web-projects/insight-space/index.html" scrolling="no" title="体悟集"></iframe>
+          <div class="web-shade"></div>
+
+          <div class="statusbar">
+            <span>9:41</span>
+            <span class="status-right">
+              <span class="bars"><i></i><i></i><i></i><i></i></span>
+              <span class="wifi"></span>
+              <span class="battery"><i></i></span>
+            </span>
+          </div>
+
+          <div class="topbar">
+            <div class="topbar-row">
+              <div class="brand">
+                <div class="logo">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3.2 12C5.7 7.6 8.8 5.6 12 5.6s6.3 2 8.8 6.4c-2.5 4.4-5.6 6.4-8.8 6.4S5.7 16.4 3.2 12Z"/>
+                    <path d="M6.6 12c1.5-2.2 3.3-2.9 5.4-2.9s3.9.7 5.4 2.9c-1.5 2.2-3.3 2.9-5.4 2.9S8.1 14.2 6.6 12Z" opacity=".55" stroke-width="1.1"/>
+                    <circle cx="12" cy="12" r="1.4" fill="white" stroke="none"/>
+                  </svg>
+                </div>
+                <div class="brand-copy">
+                  <div class="brand-title">观澜</div>
+                  <div class="brand-sub">INSIGHT SPACE</div>
+                </div>
+              </div>
+              <div class="actions">
+                <span class="iconbtn dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.2 5.2 8.2 12l7 6.8"/></svg></span>
+                <span class="iconbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4 7.58 4 4.01 7.58 4.01 12S7.58 20 12 20c3.73 0 6.84-2.55 7.73-6h-2.08C16.83 16.33 14.61 18 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h8V3l-3.35 3.35Z"/></svg></span>
+                <span class="iconbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span>
+              </div>
+            </div>
+            <div class="progress"><i></i></div>
+          </div>
+
+          <div class="fab">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10Zm10 8h8V11h-8v10ZM3 21h8v-6H3v6Zm10-18v6h8V3h-8Z"/></svg>
+            <span>主页</span>
+          </div>
+
+          <div class="gesture"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="caption"><b>项目主页</b><em>PROJECT PORTAL</em></div>
+      <div class="phone">
+        <div class="screen">
+          <div class="glow g1"></div><div class="glow g2"></div>
+          <iframe class="web" src="https://etherealnymph.github.io/web-projects/" scrolling="no" title="项目主页"></iframe>
+          <div class="web-shade"></div>
+
+          <div class="statusbar">
+            <span>9:41</span>
+            <span class="status-right">
+              <span class="bars"><i></i><i></i><i></i><i></i></span>
+              <span class="wifi"></span>
+              <span class="battery"><i></i></span>
+            </span>
+          </div>
+
+          <div class="topbar">
+            <div class="topbar-row">
+              <div class="brand">
+                <div class="logo">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3.2 12C5.7 7.6 8.8 5.6 12 5.6s6.3 2 8.8 6.4c-2.5 4.4-5.6 6.4-8.8 6.4S5.7 16.4 3.2 12Z"/>
+                    <path d="M6.6 12c1.5-2.2 3.3-2.9 5.4-2.9s3.9.7 5.4 2.9c-1.5 2.2-3.3 2.9-5.4 2.9S8.1 14.2 6.6 12Z" opacity=".55" stroke-width="1.1"/>
+                    <circle cx="12" cy="12" r="1.4" fill="white" stroke="none"/>
+                  </svg>
+                </div>
+                <div class="brand-copy">
+                  <div class="brand-title">观澜</div>
+                  <div class="brand-sub">PROJECT PORTAL</div>
+                </div>
+              </div>
+              <div class="actions">
+                <span class="iconbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.2 5.2 8.2 12l7 6.8"/></svg></span>
+                <span class="iconbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4 7.58 4 4.01 7.58 4.01 12S7.58 20 12 20c3.73 0 6.84-2.55 7.73-6h-2.08C16.83 16.33 14.61 18 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h8V3l-3.35 3.35Z"/></svg></span>
+                <span class="iconbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span>
+              </div>
+            </div>
+            <div class="progress"><i></i></div>
+          </div>
+
+          <div class="fab left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.2 12C5.7 7.6 8.8 5.6 12 5.6s6.3 2 8.8 6.4c-2.5 4.4-5.6 6.4-8.8 6.4S5.7 16.4 3.2 12Z"/><path d="M6.6 12c1.5-2.2 3.3-2.9 5.4-2.9s3.9.7 5.4 2.9c-1.5 2.2-3.3 2.9-5.4 2.9S8.1 14.2 6.6 12Z" opacity=".55"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg>
+            <span>体悟集</span>
+          </div>
+
+          <div class="gesture"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">WEBVIEW SHELL · SEARCH · DRAGGABLE ENTRY · TWO SITES</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_app">
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/web_bg"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
+
+    <LinearLayout
+        android:id="@+id/loading_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_loading"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp">
+
+        <com.etherealnymph.guanlan.OrbitLoadingView
+            android:id="@+id/orbit_view"
+            android:layout_width="148dp"
+            android:layout_height="148dp" />
+
+        <TextView
+            android:id="@+id/loading_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:letterSpacing="0.02"
+            android:text="@string/loading_insight"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/loading_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:letterSpacing="0.16"
+            android:text="@string/loading_hint"
+            android:textColor="@color/text_tertiary"
+            android:textSize="9sp" />
+
+        <TextView
+            android:id="@+id/loading_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:letterSpacing="0.08"
+            android:text="@string/loading_percent_zero"
+            android:textColor="@color/accent"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/error_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_app"
+        android:clickable="true"
+        android:fillViewport="true"
+        android:focusable="true"
+        android:overScrollMode="never"
+        android:paddingTop="86dp"
+        android:paddingBottom="96dp"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+
+            <FrameLayout
+                android:layout_width="104dp"
+                android:layout_height="104dp"
+                android:background="@drawable/bg_error_icon">
+
+                <ImageView
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_cloud_off"
+                    android:tint="@color/accent" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/error_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="@string/error_title"
+                android:textColor="@color/text_primary"
+                android:textSize="21sp" />
+
+            <TextView
+                android:id="@+id/error_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:lineSpacingExtra="4dp"
+                android:text="@string/error_network"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/error_target"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:ellipsize="middle"
+                android:gravity="center"
+                android:maxLines="2"
+                android:textColor="@color/text_tertiary"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/error_retry"
+                style="@style/Widget.Guanlan.PrimaryButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="28dp"
+                android:drawableStart="@drawable/ic_refresh_dark"
+                android:text="@string/action_retry" />
+
+            <TextView
+                android:id="@+id/error_portal"
+                style="@style/Widget.Guanlan.SecondaryButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/action_portal" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top_bar"
+        android:clipToOutline="true"
+        android:elevation="8dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/brand_block"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:baselineAligned="false"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="9dp"
+            android:paddingEnd="4dp">
+
+            <FrameLayout
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/bg_logo"
+                android:contentDescription="@null">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_mark" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:text="@string/brand_title"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/brand_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="0.1"
+                    android:maxLines="1"
+                    android:text="@string/brand_insight"
+                    android:textColor="@color/accent"
+                    android:textSize="8sp" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                style="@style/Widget.Guanlan.IconButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="2dp"
+                android:contentDescription="@string/nav_back"
+                android:src="@drawable/ic_back" />
+
+            <ImageButton
+                android:id="@+id/btn_reload"
+                style="@style/Widget.Guanlan.IconButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/nav_reload"
+                android:src="@drawable/ic_refresh" />
+
+            <ImageButton
+                android:id="@+id/btn_search"
+                style="@style/Widget.Guanlan.IconButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/nav_search"
+                android:src="@drawable/ic_search" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/page_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="1dp"
+            android:alpha="0"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_horizontal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/search_bar"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_top_bar"
+        android:clipToOutline="true"
+        android:elevation="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingEnd="4dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_search"
+            android:tint="@color/accent" />
+
+        <EditText
+            android:id="@+id/search_input"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/search_hint"
+            android:imeOptions="actionGo"
+            android:inputType="textNoSuggestions"
+            android:maxLines="1"
+            android:padding="0dp"
+            android:singleLine="true"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_tertiary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/search_go"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/search_go"
+            android:textColor="@color/accent"
+            android:textSize="13sp" />
+
+        <ImageButton
+            android:id="@+id/search_close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_icon_button"
+            android:contentDescription="@string/search_close"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_close"
+            android:tint="@color/text_secondary" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|end"
+        android:background="@drawable/bg_switch_button"
+        android:clipToOutline="true"
+        android:contentDescription="@string/tab_portal_desc"
+        android:clickable="true"
+        android:elevation="12dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <ImageView
+            android:id="@+id/switch_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_grid"
+            android:tint="@color/accent" />
+
+        <TextView
+            android:id="@+id/switch_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:fontFamily="sans-serif-medium"
+            android:includeFontPadding="false"
+            android:letterSpacing="0.02"
+            android:maxLines="1"
+            android:text="@string/switch_portal_label"
+            android:textColor="@color/accent"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+</FrameLayout>

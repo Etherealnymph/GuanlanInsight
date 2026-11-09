@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">观澜·体悟集</string>
+    <string name="app_name_full">观澜 · 体悟集</string>
+    <string name="brand_title">观澜</string>
+    <string name="brand_insight">INSIGHT SPACE</string>
+    <string name="brand_portal">PROJECT PORTAL</string>
+    <string name="brand_unknown">ETHEREAL / 实验与造物</string>
+
+    <string name="loading_insight">正在前往体悟集</string>
+    <string name="loading_portal">正在打开项目主页</string>
+    <string name="loading_unknown">正在连接</string>
+    <string name="loading_hint">连接观澜的世界</string>
+    <string name="loading_percent">%1$d%%</string>
+    <string name="loading_percent_zero">0%</string>
+
+    <string name="tab_insight">体悟集</string>
+    <string name="tab_portal">项目主页</string>
+    <string name="tab_insight_desc">打开体悟集</string>
+    <string name="tab_portal_desc">打开观澜项目主页</string>
+    <string name="switch_portal_label">主页</string>
+    <string name="switch_insight_label">体悟集</string>
+
+    <string name="nav_back">后退</string>
+    <string name="nav_forward">前进</string>
+    <string name="nav_reload">刷新</string>
+    <string name="nav_search">网址 / 搜索</string>
+    <string name="nav_logo">回到页面顶部</string>
+
+    <string name="search_hint">输入网址或搜索</string>
+    <string name="search_go">前往</string>
+    <string name="search_close">关闭搜索</string>
+    <string name="search_empty">请输入网址或关键词</string>
+    <string name="search_http_external">HTTP 链接已交给系统浏览器</string>
+    <string name="search_invalid">这个地址暂时无法打开</string>
+
+    <string name="error_title">暂时无法抵达</string>
+    <string name="error_title_offline">网络似乎断开了</string>
+    <string name="error_title_not_found">页面不在这儿</string>
+    <string name="error_title_server">服务器开了小差</string>
+    <string name="error_title_ssl">安全连接未能建立</string>
+    <string name="error_offline">当前设备没有可用网络。连接 Wi-Fi 或移动数据后再试一次。</string>
+    <string name="error_network">网络请求没有完成。请检查连接，或稍后再试。</string>
+    <string name="error_timeout">连接超时了。目标站点可能正在忙碌，稍后再试。</string>
+    <string name="error_host">找不到这个站点的地址。请检查网络或稍后再试。</string>
+    <string name="error_ssl">已停止加载，以保护你的数据。请确认网络环境安全后重试。</string>
+    <string name="error_http">页面返回了 HTTP %1$d，可能已经被移动或删除。</string>
+    <string name="error_renderer">页面渲染器意外停止，正在重新打开。</string>
+    <string name="error_target">目标 · %1$s</string>
+    <string name="error_code">错误代码 %1$d</string>
+
+    <string name="action_retry">重新加载</string>
+    <string name="action_portal">前往项目主页</string>
+    <string name="action_got_it">知道了</string>
+
+    <string name="choose_file">选择文件</string>
+    <string name="external_opened">已交给系统打开</string>
+    <string name="no_browser">没有找到可用的浏览器</string>
+    <string name="unsupported_link">这个链接暂时无法打开</string>
+    <string name="download_started">已开始下载 · %1$s</string>
+    <string name="download_failed">下载失败，请稍后重试</string>
+    <string name="download_unsupported">这个文件暂时不支持在应用内下载</string>
+    <string name="renderer_restart">页面渲染器已重启</string>
+    <string name="dialog_prompt_hint">请输入内容</string>
+</resources>
